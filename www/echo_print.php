@@ -41,7 +41,7 @@
         i{
             color: #999;
             padding-left: 10px;
-            display: inline-block;
+            display: block;
         }
     </style>
 </head>
@@ -54,12 +54,49 @@
 
     <pre style="color: green;">
 
-        
+        在 PHP 中有两个基本的输出方式： echo 和 print。
+
+        echo - 可以输出一个或多个字符串
+
+        print - 只允许输出一个字符串，返回值总为 1
+
+        提示：echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。
+
+        都是语言结构
 
     </pre>
 
     <h4>
+        <i>
+            单引号与双引号的区别：<br>
+            双引号里的变量字符串被识别成php变量<br>
+            单引号不能识别
+        </i>
+        <?php
+            $textmy = "666";
+            echo "echo $textmy"."<br>";
+            echo 'echo $textmy';
+        ?>
+    </h4>
 
+    <h4>
+        <?php
+            print "PHP is fun!<br>";
+            print "Hello world!<br>";
+            print "I'm about to learn PHP!";
+        ?>
+    </h4>
+
+    <h4>
+        <?php
+            $txt1="Learn PHP";
+            $txt2="php.cn";
+            $cars=array("Volvo","BMW","Toyota");
+            print $txt1;
+            print "<br>";
+            print "Study PHP at $txt2"."<br>";
+            print "My car is a {$cars[0]}"."<br>";
+        ?>
     </h4>
 </body>
 </html>
