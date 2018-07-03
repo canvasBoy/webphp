@@ -1,0 +1,21 @@
+/*
+  div {
+    width: rem(50); 直接传设计稿的像素值就行需要精确的地方用回px即可
+    border: 1px solid; 可用rem或px
+    font-size: 14px; 小字体建议用px
+  }
+*/
+$designWidth: 750;
+$base:$designWidth/20;
+$mobileMaxWidth:750;
+
+@function rem($px){
+  @return $px/$base+rem
+}
+
+html {
+  height: 100%;
+  @media screen and (min-width:$mobileMaxWidth+px) {
+    font-size: $mobileMaxWidth/20+px;
+  }
+}

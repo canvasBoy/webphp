@@ -1,0 +1,76 @@
+body{
+    height: 100%;
+}
+#news-page{
+    min-height: 100%;
+    // background-image: url(../images/tpl/fenlei5.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    -ms-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    .nav-fixed{
+        height: 80px;
+        width: 100%;
+    }
+    .nav{
+        height: 80px;
+        line-height: 80px;
+        background: black;
+        color: white;
+        font-size: 20px;
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        div{
+            margin-left: 5%;
+        }
+        span{
+            margin-left: 10px;
+            font-size: 16px;
+        }
+    }
+    .main{
+        .adr-info{
+            margin-left: 5%;
+            padding: 20px 0;
+            span,h4{
+                font-weight: normal;
+                font-size: 12px;
+            }
+        }
+        .content{
+            overflow: hidden;
+            margin-left: 5%;
+            margin-right: 5%;
+            padding: 10px 10px;
+            background-color: white;
+            .img{
+                float: left;
+                width: 300px;
+                img{
+                    width: 100%;
+                }
+            }
+            .list{
+                float: left;
+                max-width: 70%;
+                max-height: 165px;
+                li{
+                    padding-left: 20px;
+                    padding-top: 5px;
+                }
+                .li-title{
+                    font-size: 16px;
+                }
+                .li-record{
+                    font-size: 14px;
+                }
+                .li-text{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}

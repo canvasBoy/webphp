@@ -1,0 +1,147 @@
+@function pi() {
+    @return 3.14159265359;
+}
+
+@function pow($number, $exp) {
+    $value: 1;
+    @if $exp > 0 {
+        @for $i from 1 through $exp {
+            $value: $value * $number;
+        }
+    }
+    @else if $exp < 0 {
+        @for $i from 1 through -$exp {
+            $value: $value / $number;
+        }
+    }
+    @return $value;
+}
+
+@function fact($number) {
+    $value: 1;
+    @if $number > 0 {
+        @for $i from 1 through $number {
+            $value: $value * $i;
+        }
+    }
+    @return $value;
+}
+
+@function rad($angle) {
+    $unit: unit($angle);
+    $unitless: $angle / ($angle * 0 + 1);
+    @if $unit == deg {
+        $unitless: $unitless / 180 * pi();
+    }
+    @return $unitless;
+}
+
+@function sin($angle) {
+    $sin: 0;
+    $angle: rad($angle);
+    @for $i from 0 through 10 {
+        $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+    }
+    @return $sin;
+}
+
+@function cos($angle) {
+    $cos: 0;
+    $angle: rad($angle);
+    @for $i from 0 through 10 {
+        $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+    }
+    @return $cos;
+}
+
+@function tan($angle) {
+    @return sin($angle) / cos($angle);
+}
+
+$loadingSize: 4rem;
+$dotRadius: .6rem;
+$dotNums: 14;
+$dotColor: #666;
+
+.load-warp {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  max-width: 640px;
+  background: #e9e9e9;
+}
+
+@media (min-width: 992px) {
+    .load-warp{
+        max-width: 850px;
+    }
+}
+
+.loading {
+  width: $loadingSize;
+  height: $loadingSize;
+  line-height: $loadingSize;
+  text-align: center;
+  color: $dotColor;
+  transform-origin: center;
+  margin: 50px auto;
+  border-radius: 50%;
+  
+  div {
+    position: relative;
+    color: $dotColor;
+    width: $dotRadius;
+    height: $dotRadius;
+    margin-top: -$dotRadius / 2;
+    margin-left: -$dotRadius / 2;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+    
+    span {
+      width: $dotRadius;
+      height: $dotRadius;
+      animation: ball-spin 1s infinite ease-in-out;  
+      
+      display: block;
+      background-color: currentColor;
+      border: 0 solid currentColor;
+      border-radius: 100%;      
+    }
+    
+    @for $i from 1 through 14 {
+    &:nth-child(#{$i}) {
+      transform: translate(cos(($i - 1) * 360deg / $dotNums) * $loadingSize / 2, sin(($i - 1) * 360deg / $dotNums) * $loadingSize / 2);
+        & > span {
+      animation-delay: -(1 + $i * 1 / $dotNums) * 1s
+          
+          }
+      }
+       
+    }
+  }
+  
+}
+
+@keyframes ball-spin {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+      transform: scale(0);
+    }
+}
+
+@import '../../_common/css/mobile';

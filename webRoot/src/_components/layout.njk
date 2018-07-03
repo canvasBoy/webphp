@@ -1,0 +1,30 @@
+{% import "header/header.html" as head %}
+{% import "footer/footer.html" as foot %}
+{% import "loading/loading.html" as loading %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{% block webtext %}{% endblock %}">
+    <link rel="shortcut icon" href="{% block icon %}{% endblock %}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% if equipment == "mobile" %}
+        {% include "meta.njk" %}
+        <link type="text/css" rel="stylesheet" href="/css/style.css">
+    {% elif equipment == "PC" %}
+        {% include "pcmeta.njk" %}
+        <link type="text/css" rel="stylesheet" href="/css/pcstyle.css">
+    {% endif %}
+    {% block CSS %}{% endblock %}
+</head>
+<body ontouchstart="">
+    {% if load %}{{loading.loading(loadData)}}{% endif %}
+
+    {% if Header %}{{head.header(headData)}}{% endif %}
+    {% block content %}{% endblock %}
+    {% if Footer %}{{foot.footer(footData)}}{% endif %}
+
+    {% if jQ %}<script type="text/javascript" src="/js/_common/jquery-3.3.1/jquery-min.js"></script>{% endif %}
+    {% block JS %}{% endblock %}
+</body>
+</html>

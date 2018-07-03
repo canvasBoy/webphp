@@ -1,0 +1,157 @@
+{% extends "layout.njk" %}{% set jQ = true %}{% set equipment = "PC" %}
+
+{% block webtext %}锐克新闻{% endblock %}
+{% block title %}锐克新闻{% endblock %}
+{% block icon %}/images/tpl/logo.png{% endblock %}
+
+{% set Header=false %}{% set headData={title:'我是头部'} %}
+{% set Footer=false %}{% set footData={title:'我是尾部'} %}
+{% set load = false %}{% set loadData = '加载中' %}
+
+{% block CSS %}
+<style>
+    #news-page{
+        background-image: url(/images/tpl/fenlei5.jpg);
+        background-size: cover;
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/tpl/fenlei5.jpg",sizingMethod='scale');
+    }
+</style>
+{% endblock %}
+
+{% block JS %}
+<script>
+
+    /*
+        开发测试
+        console.log($)
+        devTest()
+        
+        function devTest(){
+            var lists = [{img:'/images/tpl/fenlei5.jpg',
+                title:'我是第一行我是第一行',
+                time:'2018-6-1',
+                renum:'450',
+                text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位\
+                置您现在的位置您现在的位置在的位置您现在的位置您现在的位置您现在的\
+                位置在的位置您现在的位置您现在的位置您现在的位置在的位置您现在的位置您现在的位置您现在的位置'}];
+
+            console.log(lists[0].img)
+
+            $('.main').html($('.main').html() + '<div class="content">\
+                <div class="img">\
+                    <img src="' + lists[0].img + '" alt="锐克"/>\
+                </div>\
+                <ul class="list">\
+                    <li class="li-title"><h4>' + lists[0].title + '</h4></li>\
+                    <li class="li-record">发布时间：' + lists[0].time + ' 浏览数量：' + lists[0].renum + '</li>\
+                    <li class="li-text">' + lists[0].text + '</li>\
+                </ul>\
+            </div>');
+        }
+    */
+
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: {
+        
+        },
+        success: function(data){
+            data = JSON.parse(data);
+
+            for(var i=0;i<data.length;i++){
+                $('.main').html($('.main').html() + '<div class="content">\
+                    <div class="img">\
+                        <img src="' + data[i].img + '" alt="锐克"/>\
+                    </div>\
+                    <ul class="list">\
+                        <li class="li-title"><h4>' + data[i].title + '</h4></li>\
+                        <li class="li-record">发布时间：' + data[i].time + ' 浏览数量：' + data[i].renum + '</li>\
+                        <li class="li-text">' + data[i].text + '</li>\
+                    </ul>\
+                </div>');
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="news-page">
+        <div class="nav-fixed">
+            <div class="nav">
+                <div>
+                    最新资讯
+                    <span>xwzxlol</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="adr-info">
+                <h4>您现在的位置：<span>首页</span> > <span>最新资讯</span></h4>
+            </div>
+
+            {% set lists = [{img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现
+            在的位置您现在的位置您现在的位置您现在的位置
+            在的位置您现在的位置您现在的位置您现在的位置
+            在的位置您现在的位置您现在的位置您现在的位置在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'},
+            {img:'/images/tpl/fenlei5.jpg',
+            title:'我是第一行我是第一行',
+            time:'2018-6-1',
+            renum:'450',
+            text:'您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置您现在的位置'}] %}
+            
+            {% for i in lists %}
+                <div class="content">
+                    <div class="img">
+                        <img src="{{i.img}}" alt="锐克">
+                    </div>
+
+                    <ul class="list">
+                        <li class="li-title"><h4>{{i.title}}</h4></li>
+                        <li class="li-record">发布时间：{{i.time}} 浏览数量：{{i.renum}}</li>
+                        <li class="li-text">{{i.text}}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

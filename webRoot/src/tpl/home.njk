@@ -1,0 +1,239 @@
+{% extends "layout.njk" %}{% set jQ = true %}{% set equipment = "PC" %}
+
+{% block webtext %}锐克首页,锐克新闻{% endblock %}
+{% block title %}锐克首页{% endblock %}
+{% block icon %}/images/tpl/logo.png{% endblock %}
+
+{% set Header=false %}{% set headData={title:'我是头部'} %}
+{% set Footer=false %}{% set footData={title:'我是尾部'} %}
+{% set load = false %}{% set loadData = '加载中' %}
+
+{% block CSS %}
+<style>
+    #home-page{
+        background-image: url(/images/tpl/search.png);
+        background-size: cover;
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/tpl/search.png",sizingMethod='scale');
+    }
+    .search input{
+        //background-image: url(/images/tpl/search.png);
+        //background-size: cover;
+        //filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/tpl/search.png",sizingMethod='scale');
+    }
+</style>
+{% endblock %}
+
+{% block JS %}
+<script>
+
+    {#/*#}
+        //开发测试
+        console.log($)
+        devTest()
+        
+        function devTest(){
+            var data = [{img:"/images/tpl/main.png",text:"形容词形容词形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形fsddf词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形sdf形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容sdf形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容sdf词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容词形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容词形容词形容"}]
+
+            for(var i=0;i<data.length;i++){
+                $('.main').html($('.main').html() + '<li>\
+                    <img src="'+data[i].img+'">\
+                    <p>'+data[i].text+'</p>\
+                </li>');
+            }
+        }
+
+        {#*/#}
+    
+
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: {
+        
+        },
+        success: function(data){
+            data = JSON.parse(data);
+
+            /*=====
+
+            data = {
+                banner: 'imgSrc',
+                main: [{img: 'imgSrc',text: 'this is text'},{img: 'imgSrc',text: 'this is text'}],
+                code: [{img: 'imgSrc',text: 'this is text'},{img: 'imgSrc',text: 'this is text'}]
+            }
+
+            =====*/
+
+            //code 是二维码
+            //main 是内容展示
+
+            $('.banner img').attr('src',data.banner);
+
+            var code = data.code,
+                main = data.main;
+            
+            for(var i=0;i<main.length;i++){
+                $('.main').html($('.main').html() + '<li>\
+                    <img src="'+main[i].img+'">\
+                    <p>'+main[i].text+'</p>\
+                </li>');
+            }
+
+            for(var i=0;i<code.length;i++){
+                $('.code').html($('.code').html() + '<div>\
+                    <img src="'+code[i].img+'">\
+                    <p>'+code[i].text+'</p>\
+                </div>');
+            }               
+        }
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="home-page">
+
+        <div class="header">
+            <div class="head">
+                <div>
+                    <div class="logo">
+                        <img src="/images/tpl/logo.png">
+                    </div>
+
+                    <ul class="nav">
+                        <li>/</li>
+                        <li><a href="">锐克新品</a></li>
+                        <li>/</li>
+                        <li><a href="">足球俱乐部</a></li>
+                        <li>/</li>
+                        <li><a href="">品牌动态</a></li>
+                        <li>/</li>
+                        <li><a href="">品牌故事</a></li>
+                        <li>/</li>
+                    </ul>
+
+                    <div class="search">
+                        <input type="text" placeholder="SEARCH">
+                        <img src="/images/tpl/search.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="banner">
+                <img src="/images/tpl/fenlei5.jpg">
+
+                <div class="banner-title">
+                    <h3>相关大标题</h3>
+                    <p>BIAO TI YING WEN</p>
+                </div>
+            </div>
+
+            <div class="title">
+                <h4>相关大标题</h4>
+                <p>BIAO TI YING WEN</p>
+            </div>
+
+            {% set lists = [{img:"/images/tpl/main.png",text:"形容词形容词形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形fsddf词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形sdf形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容sdf形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容sdf词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容词形容词形容"},
+            {img:"/images/tpl/main.png",text:"形容词形容词形容词形容"}] %}
+            
+            {% set lists = [] %}
+
+            <ul class="main">
+            {% for i in lists %}
+                <li>
+                    <img src="{{i.img}}">
+                    <p>{{i.text}}</p>
+                </li>
+            {% endfor %} 
+            </ul>
+
+            <h3 class="bottom-title">GOAL WITH ME UCAN</h3>
+
+            <div class="footer">
+                <div class="foot">
+                    <ul class="page-foot">
+                        <li class="li-top">
+                            <div>
+                                <h5>FOLLOW US FROM AT SOCIAL MEDIA</h5>
+                                <h5>扫描二维码关注我们</h5>
+                            </div>
+                            <div class="retract">
+                                <h5>CONTACT US</h5>
+                                <h5>联系我们</h5>
+                            </div>
+                        </li>
+                        
+                        <li class="li-bottom">
+                            <div class="code">
+                                <div>
+                                    <img src="/images/tpl/code.png">
+                                    <p>微信公众号</p>
+                                </div>
+                                <div>
+                                    <img src="/images/tpl/code.png">
+                                    <p>微信公众号</p>
+                                </div>
+                                <div>
+                                    <img src="/images/tpl/code.png">
+                                    <p>微信公众号</p>
+                                </div>
+                                <div>
+                                    <img src="/images/tpl/code.png">
+                                    <p>微信公众号</p>
+                                </div>
+                            </div>
+
+                            <div class="retract">
+                                <p>
+                                    <img src="/images/tpl/phone.png">
+                                    <span>联系电话：</span>
+                                    <span><a href="tel:020-83790990">020-83790990</a></span>
+                                </p>
+                                <p>
+                                    <img src="/images/tpl/mail.png">
+                                    <span>联系邮箱：</span>
+                                    <span><a href="tel:020-83790990">921950265@qq.com</a></span>
+                                </p>
+                                <p>
+                                    <img src="/images/tpl/phone.png">
+                                    <span>联系地址：</span>
+                                    <span><a href="tel:020-83790990">
+                                        广州市海珠区怡海路192号商铺一层、二层
+                                    </a></span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="sign">
+                        <ul>
+                            <li>天猫官方旗舰店</li>
+                            <li>京东官方旗舰店</li>
+                            <li>官方新浪微博</li>
+                            <li>最新资讯</li>
+                        </ul>
+                        <div>
+                            版权所有&coyp;2018UCAN锐克官网|wordpress主题|
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

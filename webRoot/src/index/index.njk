@@ -1,0 +1,57 @@
+{% extends "layout.njk" %}
+{% set jQ = true %}
+{% set equipment = "mobile" %}
+
+{% block webtext %}佰猫云{% endblock %}
+{% block title %}HomePage{% endblock %}
+{% block icon %}/images/_common/img/xxing.png{% endblock %}
+{% block CSS %}
+<link rel="stylesheet" href="/css/_components/loading/loading.css">
+{% endblock %}
+{% set Header=false %}{% set headData={title:'我是头部'} %}
+{% set Footer=false %}{% set footData={title:'我是尾部'} %}
+{% set load = false %}{% set loadData = '加载中' %}
+
+{% block JS %}
+{#<script type="text/javascript" src="nav.list.json"></script>#}
+<script>
+    console.log($('body'));
+</script>
+{% endblock %}
+
+{% block content %}
+
+    <?php
+        for ($i=1; $i<=5; $i++){
+        $i = $i + 100;
+    ?>
+    <div><?= $i ?></div>
+    <?php
+        }
+    ?>
+
+    {% for i in lists %}
+        {% if loop.first %}
+            <div>{{ lists[loop.index0] }}</div>
+        {% endif %}
+    {% endfor %}
+
+    {% for item in items %}
+        <li>{{ items[loop.index0].title }}</li>
+    {% endfor %}
+    
+    {% for item in items %}
+        <li>{{ item.title }}</li>
+    {% endfor %}
+
+    <div>I am the home pagef</div>
+    <div>I am the home pagef</div>
+    <div>I am the home pagef</div>
+    <div>I am the home pagef</div>
+    <div>I am the home pagef</div>
+    <div>I am the home pagef</div>
+
+    {% include "../_components/vue/vue.vue" %}
+
+
+{% endblock %}
