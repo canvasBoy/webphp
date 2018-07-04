@@ -1,8 +1,26 @@
+<!-- <html>
+<body>
+<form method="post" action="<?php// echo $_SERVER['PHP_SELF'];?>">
+Name: <input type="text" name="fname">
+<input type="submit">
+</form>
 <?php
-    $str = <<<EOT
-hello world
-hello world
-hello world
-EOT;
-    print_r($str);
+/*
+    $name = $_REQUEST['fname']; 
+    echo $name; 
+    */
 ?>
+</body>
+</html> -->
+<?php
+$x = 0;
+function tes(){
+    global $x;
+    $x++;
+    echo $x;
+    if($x > 5){
+        return;
+    }
+    tes();
+}
+tes();
