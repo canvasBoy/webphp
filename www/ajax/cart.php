@@ -61,11 +61,11 @@
 /*
     $sql= "CREATE TABLE Cart (
         goods_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-        goods_name VARCHAR(30) NOT NULL ,
-        goods_img VARCHAR(30) NOT NULL,
+        goods_img VARCHAR(30) NOT NULL ,
+        goods_name VARCHAR(30) NOT NULL,
+        goods_type VARCHAR(30) NOT NULL,
         goods_pire VARCHAR(30) NOT NULL,
-        goods_num VARCHAR(30) NOT NULL,
-        goods_type VARCHAR(50),
+        goods_num VARCHAR(50),
         reg_date TIMESTAMP
     ) DEFAULT charset=utf8";
     if ($conn->query($sql) === TRUE) {
@@ -77,11 +77,25 @@
 
 
     /**
+     *  删除表***********************************************
+     */
+/*
+    $sql = "DROP TABLE Cart";
+    $result = $conn->query($sql);
+    if($result){
+        echo "<div style='color:blue;'>删除表成功！</div>";
+    }else{
+        echo "<div style='color:red;'>删除表失败！</div>";
+    }
+*/
+
+
+    /**
      *   往表里插入数据***********************************************
      */
 /*
-    $sql = "INSERT INTO Cart (goods_id, goods_name, goods_img, goods_pire, goods_num, goods_type)
-    VALUES (70, '智能联想', '/bmy/bmd.jpg', 3980, 10, '想怎么玩就怎么玩')";
+    $sql = "INSERT INTO Cart (goods_id, goods_img, goods_name, goods_type, goods_pire, goods_num)
+    VALUES (10, '/bmy/bmd.jpg', '智能联想', '想怎么玩就怎么玩', 3980, 40)";
 
     if ($conn->query($sql) === TRUE) {
         echo "<div style='color:blue;'>新记录插入成功</div>";
@@ -171,56 +185,42 @@
 */
 
 
-    /**
-     *  删除表***********************************************
-     */
-/*
-    $sql = "DROP TABLE Cart";
-    $result = $conn->query($sql);
-    if($result){
-        echo "<div style='color:blue;'>删除表成功！</div>";
-    }else{
-        echo "<div style='color:red;'>删除表失败！</div>";
-    }
-*/
-
     //关闭数据库 #####################################################################
     $conn->close();
 
-    // if($_POST['action']=='10'){
+    if(!$_POST){
 
-    //     $code = '1';
+        $code = 1;
+        $message = 'ok';
 
-    //     $message = 'ok';
+        $obj = array(
+            "goods_id"=>"35",
+            "goods_img"=>"/bmy/bmd.jpg",
+            "goods_name"=>"智能手机",
+            "goods_type"=>"有光泽",
+            "goods_pire"=>"3980",
+            "goods_num"=>"10"
+        );
 
-    //     $obj = array(
-    //         "goods_id"=>"35",
-    //         "goods_img"=>"/bmy/bmd.jpg",
-    //         "goods_name"=>"智能手机",
-    //         "goods_type"=>"有光泽",
-    //         "goods_pire"=>"3980",
-    //         "goods_num"=>"10"
-    //     );
-
-    //     $obj1 = array(
-    //         "goods_id"=>"35",
-    //         "goods_img"=>"/bmy/bmd.jpg",
-    //         "goods_name"=>"智能手机",
-    //         "goods_type"=>"有光泽",
-    //         "goods_pire"=>"3980",
-    //         "goods_num"=>"108"
-    //     );
+        $obj1 = array(
+            "goods_id"=>"35",
+            "goods_img"=>"/bmy/bmd.jpg",
+            "goods_name"=>"智能手机",
+            "goods_type"=>"有光泽",
+            "goods_pire"=>"3980",
+            "goods_num"=>"108"
+        );
         
-    //     $data = array($obj,$obj1);
+        $data = array($obj,$obj1);
 
-    //     $result = array(
-    //         'code' => $code,
-    //         'message' => $message,
-    //         'data' => $data
-    //     );
+        $result = array(
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        );
 
-    //     echo json_encode($result);
+        echo json_encode($result);
     
-    // }
+    }
     
 ?>

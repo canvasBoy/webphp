@@ -166,12 +166,15 @@
                 $.ajax({
                     url: '/ajax/cart.php',
                     data: {
-                        action : '10'
+                        
                     },
                     dataType: 'json',
                     // contentType: 'application/json; charset=utf-8',
                     type: 'post',
                     success: function(data){
+                        if(data.code != 1){
+                            return;
+                        }
                         data.data.forEach(function(i){
                             $('#main').html($('#main').html() +
                                 '<div class="main">\
