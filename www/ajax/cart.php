@@ -2,7 +2,7 @@
     // header("Content-Type: text/html;charset=utf-8"); //好像没用
     /**
     *   购物车
-    *   购物车功能实现
+    *   购物车操作数据库学习
     *   @author zoujg
     *   @version GIT: 2018-07-07 10:30
     */
@@ -185,8 +185,63 @@
 */
 
 
-    //关闭数据库 #####################################################################
+    //关闭数据库 
     $conn->close();
+########################################## 以上个人学习记录 ##############################################################################################
+
+    /**
+    *
+    *   购物车功能实现
+    *   @author zoujg
+    *   @version GIT: 2018-07-07 18:00
+    *   cart page start =>>>>>>>>>>>>>>>>>>>>>
+    *
+    */
+
+    $addrIP = "localhost";
+    $adminName = "root";
+    $adminPwd = "root";
+    $database = "BMYBASE";
+    
+    $conn = new mysqli($addrIP, $adminName, $adminPwd);
+    if ($conn->connect_error) die("连接失败: " . $conn->connect_error);
+    
+    mysqli_query($conn , "set names utf8");
+    mysqli_select_db($conn, $database);
+
+    /**
+    *   创建虚拟表并插入数据
+    */
+/*
+    $sql= "CREATE TABLE if not exists Cart (
+        goods_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+        goods_img VARCHAR(30) NOT NULL ,
+        goods_name VARCHAR(30) NOT NULL,
+        goods_type VARCHAR(30) NOT NULL,
+        goods_pire VARCHAR(30) NOT NULL,
+        goods_num VARCHAR(50),
+        reg_date TIMESTAMP
+    ) DEFAULT charset=utf8";
+    if ($conn->query($sql) === TRUE) {
+        echo "<div style='color:blue;'>Table Cart created successfully</div>";
+    } else {
+        echo "<div style='color:red;'>创建数据表错误: " . $conn->error . "</div>";
+    }
+
+
+    $sql = "INSERT INTO Cart (goods_id, goods_img, goods_name, goods_type, goods_pire, goods_num)
+    VALUES (45, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<div style='color:blue;'>新记录插入成功</div>";
+    } else {
+        echo "<div style='color:red;'>Error: " . $sql . "<br>" . $conn->error . "</div>";
+    }
+*/
+
+
+    $conn->close();
+
 
     if(!$_POST){
 
