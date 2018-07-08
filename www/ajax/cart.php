@@ -194,6 +194,7 @@
     *   购物车功能实现
     *   @author zoujg
     *   @version GIT: 2018-07-07 18:00
+    *   @alterData 修改时间 2018-07-08 16:30
     *   cart page start =>>>>>>>>>>>>>>>>>>>>>
     *
     */
@@ -210,7 +211,7 @@
     mysqli_select_db($conn, $database);
 
     /**
-    *   创建虚拟表并插入数据
+    *   此时数据库啥表都没有，那么先创建一个临时学习用的虚拟表并插入数据
     */
 /*
     $sql= "CREATE TABLE if not exists Cart (
@@ -238,44 +239,60 @@
         echo "<div style='color:red;'>Error: " . $sql . "<br>" . $conn->error . "</div>";
     }
 */
+    /**
+    *   数据读取并操作返回给请求页面
+    */
+    // print_r($_POST['cart']);
+    $sql = "select * from Cart";
+    $result = $conn->query($sql);
+    $attr = $result->fetch_all();
+    // print_r($attr);
+    //遍历每一条数据
+    foreach($attr as $v){
 
-
-    $conn->close();
-
-
-    if(!$_POST){
-
-        $code = 1;
-        $message = 'ok';
-
-        $obj = array(
-            "goods_id"=>"35",
-            "goods_img"=>"/bmy/bmd.jpg",
-            "goods_name"=>"智能手机",
-            "goods_type"=>"有光泽",
-            "goods_pire"=>"3980",
-            "goods_num"=>"10"
-        );
-
-        $obj1 = array(
-            "goods_id"=>"35",
-            "goods_img"=>"/bmy/bmd.jpg",
-            "goods_name"=>"智能手机",
-            "goods_type"=>"有光泽",
-            "goods_pire"=>"3980",
-            "goods_num"=>"108"
-        );
-        
-        $data = array($obj,$obj1);
-
-        $result = array(
-            'code' => $code,
-            'message' => $message,
-            'data' => $data
-        );
-
-        echo json_encode($result);
-    
+        /**
+        *   下面将php每一条数据对应字段值转化成键值对
+        */
+        //方法一
+        $title_arr = array("goods_id","goods_img","goods_name","goods_type","goods_pire","goods_num");
+        for($i=0;$i<count($title_arr);$i++){
+            $cli_arr[$title_arr[$i]] = $v[$i];
+        }
+        //方法二
+        // foreach($v as $i){
+        //     switch($i){
+        //         case $v[0]:
+        //             $cli_arr["goods_id"] = $i;
+        //             break;
+        //         case $v[1]:
+        //             $cli_arr["goods_img"] = $i;
+        //             break;
+        //         case $v[2]:
+        //             $cli_arr["goods_name"] = $i;
+        //             break;
+        //         case $v[3]:
+        //             $cli_arr["goods_type"] = $i;
+        //             break;
+        //         case $v[4]:
+        //             $cli_arr["goods_pire"] = $i;
+        //             break;
+        //         case $v[5]:
+        //             $cli_arr["goods_num"] = $i;
+        //             break;
+        //     }
+        // }
+        $cli_arr_par[] = $cli_arr;
     }
+
+    $code = 1;
+    $message = 'ok';
+    $back_cart = array(
+        'code' => $code,
+        'message' => $message,
+        'data' => $cli_arr_par
+    );
+    echo json_encode($back_cart);
+    
+    $conn->close();
     
 ?>

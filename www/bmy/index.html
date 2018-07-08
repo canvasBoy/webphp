@@ -166,12 +166,13 @@
                 $.ajax({
                     url: '/ajax/cart.php',
                     data: {
-                        
+                        cart: '1'
                     },
-                    dataType: 'json',
-                    // contentType: 'application/json; charset=utf-8',
+                    contentType: 'application/json; charset=utf-8',
                     type: 'post',
                     success: function(data){
+                        // console.log(data)
+                        data = JSON.parse(data);
                         if(data.code != 1){
                             return;
                         }
@@ -211,6 +212,8 @@
                         Main();
                     },
                     error: function(data){
+
+                        console.log(data)
                         alert('error')  
                     }
                 });
