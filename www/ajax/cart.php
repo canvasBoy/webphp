@@ -229,9 +229,14 @@
         echo "<div style='color:red;'>创建数据表错误: " . $conn->error . "</div>";
     }
 
-
+    //假设创建多条
+    $arr_str1 = "(23, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str2 = "(33, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str3 = "(43, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str4 = "(53, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    
     $sql = "INSERT INTO Cart (goods_id, goods_img, goods_name, goods_type, goods_pire, goods_num)
-    VALUES (45, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    VALUES ".$arr_str1.','.$arr_str2.','.$arr_str3.','.$arr_str4;
 
     if ($conn->query($sql) === TRUE) {
         echo "<div style='color:blue;'>新记录插入成功</div>";
@@ -239,52 +244,68 @@
         echo "<div style='color:red;'>Error: " . $sql . "<br>" . $conn->error . "</div>";
     }
 */
+
     /**
     *   数据读取并操作返回给请求页面
     */
-    // print_r($_POST['cart']);
-    $sql = "select * from Cart";
-    $result = $conn->query($sql);
-    $attr = $result->fetch_all();
-    // print_r($attr);
-    //遍历每一条数据
-    foreach($attr as $v){
+    //此处声明一个成功返回的数组
+    $cli_arr_par = [];
 
-        /**
-        *   下面将php每一条数据对应字段值转化成键值对
-        */
-        //方法一
-        $title_arr = array("goods_id","goods_img","goods_name","goods_type","goods_pire","goods_num");
-        for($i=0;$i<count($title_arr);$i++){
-            $cli_arr[$title_arr[$i]] = $v[$i];
+    if($_POST && $_POST['cartid']){
+        $sql = "DELETE FROM Cart WHERE goods_id = ".$_POST['cartid'];
+        $result = $conn->query($sql);
+        if($result){
+            $code = 1;
+        }else{
+            $code = 2;
         }
-        //方法二
-        // foreach($v as $i){
-        //     switch($i){
-        //         case $v[0]:
-        //             $cli_arr["goods_id"] = $i;
-        //             break;
-        //         case $v[1]:
-        //             $cli_arr["goods_img"] = $i;
-        //             break;
-        //         case $v[2]:
-        //             $cli_arr["goods_name"] = $i;
-        //             break;
-        //         case $v[3]:
-        //             $cli_arr["goods_type"] = $i;
-        //             break;
-        //         case $v[4]:
-        //             $cli_arr["goods_pire"] = $i;
-        //             break;
-        //         case $v[5]:
-        //             $cli_arr["goods_num"] = $i;
-        //             break;
-        //     }
-        // }
-        $cli_arr_par[] = $cli_arr;
-    }
+    }else{
+        $sql = "select * from Cart";
+        $result = $conn->query($sql);
+        if($result){
+            $code = 1;
+        }else{
+            $code = 2;
+        }
+        $attr = $result->fetch_all();
+        // print_r($attr);
+        //遍历每一条数据
+        foreach($attr as $v){
 
-    $code = 1;
+            /**
+            *   下面将php每一条数据对应字段值转化成键值对
+            */
+            //方法一
+            $title_arr = array("goods_id","goods_img","goods_name","goods_type","goods_pire","goods_num");
+            for($i=0;$i<count($title_arr);$i++){
+                $cli_arr[$title_arr[$i]] = $v[$i];
+            }
+            //方法二
+            // foreach($v as $i){
+            //     switch($i){
+            //         case $v[0]:
+            //             $cli_arr["goods_id"] = $i;
+            //             break;
+            //         case $v[1]:
+            //             $cli_arr["goods_img"] = $i;
+            //             break;
+            //         case $v[2]:
+            //             $cli_arr["goods_name"] = $i;
+            //             break;
+            //         case $v[3]:
+            //             $cli_arr["goods_type"] = $i;
+            //             break;
+            //         case $v[4]:
+            //             $cli_arr["goods_pire"] = $i;
+            //             break;
+            //         case $v[5]:
+            //             $cli_arr["goods_num"] = $i;
+            //             break;
+            //     }
+            // }
+            $cli_arr_par[] = $cli_arr;
+        }
+    }
     $message = 'ok';
     $back_cart = array(
         'code' => $code,

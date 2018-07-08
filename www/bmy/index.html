@@ -165,10 +165,6 @@
             airA: function(ele){
                 $.ajax({
                     url: '/ajax/cart.php',
-                    data: {
-                        cart: '1'
-                    },
-                    contentType: 'application/json; charset=utf-8',
                     type: 'post',
                     success: function(data){
                         // console.log(data)
@@ -368,7 +364,7 @@
                     ele.click(function(){
                         var _this = $(this);
                         $.ajax({
-                            url: "#",
+                            url: "/ajax/cart.php",
                             type: 'POST',
                             data: {
                                 'cartid': $(this).parent().next().html()
