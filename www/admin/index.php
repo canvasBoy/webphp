@@ -27,6 +27,7 @@
     mysqli_query($conn , "set names utf8");
     mysqli_select_db($conn, $database);
 
+    //如果没表则创建表
     $sql= "CREATE TABLE if not exists admIndex (
         goods_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
         goods_img VARCHAR(30) NOT NULL ,
