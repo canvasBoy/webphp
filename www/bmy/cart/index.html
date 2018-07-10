@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="screen-orientation" content="portrait"><!-- UC强制竖屏 -->
+    <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="佰猫云">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <script type="text/javascript" src="/bmy/jquery-5f40de3296.js"></script>
+    <title>购物车</title>
+    <link rel="stylesheet" href="/bmy/cart/cart.css">
+</head>
+<body>
+<header>
+    <div class="head">
+        <a class="left" href="/">
+            <img src="/bmy/img/箭头_left.png" alt="">
+        </a>
+
+        <span>购物车</span>
+
+        <span class="right"><span>编辑</span></span>
+    </div>
+</header>
+
+<div id="main"></div>
+<!--
+<div class="main">
+    <div class="icon">
+        <div><img src="/bmy/img/gou.png" alt=""></div>
+    </div>
+
+    <div class="img">
+        <img src="/bmy/img/bmd.jpg" alt="">
+    </div>
+
+    <div class="con">
+        <div class="title">
+            产品标题
+        </div>
+        <div class="color" style="padding-bottom:5px;">
+            产品属性
+
+        </div>
+        
+        <div class="foot">
+            <div class="big">￥<span>产品价格</span></div>
+            <div class="tool">
+                <span class="j-s">-</span>
+                <span class="s">10</span>
+                <span class="js">+</span>
+            </div>
+        </div>
+    </div>
+    <p class="delete">
+        <span>删除</span>
+    </p>
+    <i style="display:none;">产品id</i>
+</div>
+-->
+<div class="main jsst">
+    <div class="icont">
+        <div><img src="/bmy/img/gou.png" alt=""></div>
+    </div>
+
+    <div class="imgt">
+        <span>全选</span>
+    </div>
+
+    <div class="cont">
+        <div class="titles">
+            结算
+        </div>
+        <div class="colors">
+            ￥<span>0.0</span>
+        </div>
+        <div class="peis">
+            合计:
+        </div>
+    </div>
+</div>
+
+<div class="foot_my"></div>
+<div class="tools">
+    <div>
+        <p>请输入数量值</p>
+        <input type="text" value="10">
+    </div>
+</div>
+<div class="delete_pop">
+    <span>删除成功</span>
+</div>
+
+<footer>
+    <div class="Type_footer">
+        <ul class="Type_ul">
+            <a href="#">
+                <li>
+                    <img src="/bmy/img/首页_h.png" alt="佰猫">
+                    <p>首页</p>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <img src="/bmy/img/分类_h.png" alt="佰猫">
+                    <p>分类</p>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <img src="/bmy/img/纸飞机_h.png" alt="佰猫">
+                    <p>邀请好友</p>
+                </li>
+            </a>
+            <a href="javascript:viod(0);">
+                <li>
+                    <img src="/bmy/img/购物车.png" alt="佰猫">
+                    <p>购物车</p>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <img src="/bmy/img/我的_h.png" alt="佰猫">
+                    <p>我的</p>
+                </li>
+            </a>
+        </ul>
+    </div>
+</footer>
+
+<script>
+
+    $(function(){
+        var CartPage = function(ele, opt){
+            this.ele = ele,
+                this.air = {
+                    airA: opt.airA,
+                    airB: opt.airB
+                },
+                this.setting = $.extend({},this.air,opt);
+        };
+
+        CartPage.prototype = {
+            executeAir: function(){
+                this.setting.airA(this.ele);
+                if(this.setting.airB){
+                    this.setting.airB(this.ele);
+                }
+            }
+        };
+
+        $.fn.air = function(opt){
+            return new CartPage(this,opt).executeAir();
+        };
+
+        var time = 3000;
+
+        $('.main').air({
+            airA: function(ele){
+                $.ajax({
+                    url: '/ajax/cart.php',
+                    type: 'post',
+                    success: function(data){
+                        // console.log(data)
+                        data = JSON.parse(data);
+                        if(data.code != 1){
+                            return;
+                        }
+                        data.data.forEach(function(i){
+                            $('#main').html($('#main').html() +
+                                '<div class="main">\
+                                    <div class="icon">\
+                                        <div><img src="/bmy/img/gou.png" alt=""></div>\
+                                    </div>\
+                                    <div class="img">\
+                                        <img src="'+ i.goods_img +'" alt="">\
+                                    </div>\
+                                    <div class="con">\
+                                        <div class="title">\
+                                            '+ i.goods_name +'\
+                                        </div>\
+                                        <div class="color" style="padding-bottom:5px;">\
+                                            '+ i.goods_type +'\
+                                        </div>\
+                                        <div class="foot">\
+                                            <div class="big">￥<span>'+ i.goods_pire +'</span></div>\
+                                            <div class="tool">\
+                                                <span class="j-s">-</span>\
+                                                <span class="s">'+ i.goods_num +'</span>\
+                                                <span class="js">+</span>\
+                                            </div>\
+                                        </div>\
+                                    </div>\
+                                    <p class="delete">\
+                                        <span>删除</span>\
+                                    </p>\
+                                    <i style="display:none;">'+ i.goods_id +'</i>\
+                                </div>'
+                            );
+                        },this);
+                        
+                        Main();
+                    },
+                    error: function(data){
+
+                        console.log(data)
+                        alert('error')  
+                    }
+                });
+            }
+        });
+        function Main(){
+            //产品图标选择
+            $('.main .icon').air({
+                airA: function(ele){
+                    var isHS;
+                    ele.click(function(){
+                        $(this).find('img').is(':hidden') ? $(this).find('img').show() : $(this).find('img').hide();
+                        isHS = true;
+                        ele.each(function(){
+                            $(this).find('img').is(':hidden') ? isHS = false : void(0);
+                        });
+                        isHS ? $('.icont img').show() : $('.icont img').hide();
+                        total();
+                    });
+                }
+            });
+
+            //全选按钮事件
+            $('.icont').air({
+                airA: function(ele){
+                    ele.click(function(){
+                        if($(this).find('img').is(':hidden')){
+                            $(this).find('img').show();
+                            $('.main .icon').each(function(){
+                                $(this).find('img').show();
+                            });
+                        }else{
+                            $(this).find('img').hide();
+                            $('.main .icon').each(function(){
+                                $(this).find('img').hide();
+                            });
+                        }
+                        total();
+                    });
+                }
+            });
+
+            //产品数量减
+            $('.tool .j-s').air({
+                airA: function(ele){
+                    ele.click(function(){
+                        if($(this).next().html() > 0){
+                            $(this).next().html($(this).next().html() - 1)
+                        };
+                        total();
+                    });
+                }
+            });
+
+            //产品数量加
+            $('.tool .js').air({
+                airA: function(ele){
+                    ele.click(function(){
+                        $(this).prev().html(parseFloat($(this).prev().html()) + 1);
+                        total();
+                    });
+                }
+            });
+
+            //点击产品数量弹出输入数值框
+            $('.tool .s').air({
+                airA: function(ele){
+                    var _this;
+                    ele.click(function(){
+                        _this = $(this);
+                        $('.tools').show();
+                        $('.tools input').blur(function(){
+                            _this.html($(this).val());
+                            $('.tools').hide();
+                            total();
+                        })
+                    })
+                }
+            });
+
+            //点击弹框隐藏
+            $('.tools').air({
+                airA: function(ele){
+                    ele.click(function(){
+                        $(this).hide();
+                    })
+                }
+            });
+
+            //取消事件冒泡
+            $('.tools div').air({
+                airA: function(ele){
+                    ele.click(function(event){
+                        event.stopPropagation();
+                    })
+                }
+            });
+
+            //计算总价钱
+            function total(){
+                var num = 0;
+                // $('.big span').html() * $('.tool .s').html();
+                $('.big span').each(function(i){
+                    if($(this).parents('.main').children('.icon').find('img').is(':visible')){
+                        num = num + $(this).html() * $('.tool .s').eq(i).html();
+                    }
+                });
+                $('.colors span').html(num);
+            }
+            total();
+
+            //编辑产品
+            $('.head .right').air({
+                airA: function(ele){
+                    ele.click(function(event){
+                        if(!$('.main')){return}
+                        $('.delete').toggle();
+                        if($('.delete').is(':visible')){
+                            $('.delete').css({'width':'6rem','right':'-6rem'});
+                            $('.main').scrollLeft(1000);
+                            $(this).children().html('完成')
+                        }else{
+                            $('.delete').css({'width':'0','right':'0'});
+                            $(this).children().html('编辑')
+                        }
+                    })
+                },
+                airB: function(ele){
+                    var isif = false,num = 0;
+                    $('.main').scroll(function(){
+                        if(!$(this).scrollLeft()){
+                            isif = true;
+                            $('.main').each(function(){
+                                if($(this).scrollLeft()){
+                                    isif = false;
+                                    num++;
+                                }
+                            });
+                            if(isif){
+                                $('.delete').css({'width':'0','right':'0'});
+                                $('.delete').hide();
+                                ele.children().html('编辑')
+                            }
+                        }
+                    });
+                }
+            });
+
+            //删除产品
+            $('.delete span').air({
+                airA: function(ele){
+                    ele.click(function(){
+                        var _this = $(this);
+                        $.ajax({
+                            url: "/ajax/cart.php",
+                            type: 'POST',
+                            data: {
+                                'cartid': $(this).parent().next().html()
+                            },
+                            success: function(data){
+                                data = JSON.parse(data);
+                                if(data.code == 1){
+                                    _this.parents('.main').remove();
+                                    total();
+                                    $('.delete_pop').html('删除成功').show().delay(time).fadeOut();
+                                }else{
+                                    $('.delete_pop').html('删除失败！').show().delay(time).fadeOut();
+                                }
+                            },
+                            error: function(data){
+                                $('.delete_pop').html('网络不佳！').show().delay(time).fadeOut();
+                            }
+                        });
+                    });
+                }
+            });
+
+            //点击结算
+            $('.titles').air({
+                airA: function(ele){
+                    var cartid = '',strr = '',color_str = '';
+                    ele.click(function(){
+                        if($('.main i').length == 0){
+                            $('.delete_pop').html('没有商品！').show().delay(time).fadeOut();
+                            return;
+                        }
+                        $('.main .s').each(function(){
+
+                            if(parseInt($(this).html()) && $(this).parents('.main').find('.icon img').is(':visible')){
+                                strr = strr + $(this).html() + ',';
+                                cartid = cartid + $(this).parents('.main').find('i').html() + ',';
+                                color_str = color_str + $(this).parents('.main').find('.color').html() + ',';
+                            }
+                        });
+                        if(!strr){
+                            $('.delete_pop').html('没有勾选商品或添加数量！').show().delay(time).fadeOut();
+                            return;
+                        }
+                        strr = strr.substring(0, strr.length-1);
+                        cartid = cartid.substring(0, cartid.length-1);
+                        color_str = color_str.substring(0, color_str.length-1);
+                        window.location.href="/Login/bkeditorder.html?cartid="+cartid+"&num="+strr+"&com_cs="+color_str;
+                    });
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

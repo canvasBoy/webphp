@@ -1,422 +1,852 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="screen-orientation" content="portrait"><!-- UC强制竖屏 -->
     <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
-    <meta name="format-detection" content="telephone=no">
+    <!-- <meta name="format-detection" content="telephone=no"> -->
     <meta name="wap-font-scale" content="no">
     <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="佰猫云">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>佰猫云（新版）</title>
     <script type="text/javascript" src="/bmy/jquery-5f40de3296.js"></script>
-    <title>购物车</title>
-    <link rel="stylesheet" href="/bmy/cart.css">
 </head>
+<style>
+    ul,li{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    header{
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    footer{
+        height: 4.2rem;
+        overflow: hidden;
+        width: 100%;}
+    footer .Type_footer{
+        box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, .2);
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        max-width: 640px;
+        overflow: hidden;
+        border-top: 1px solid #e6e6e6;
+        z-index: 100;
+        background: white;}
+    footer .Type_footer .Type_ul{
+        margin: .5rem 0;
+        padding: 0;
+        display: -webkit-box;
+        display: -moz-flex;
+        /* display: -ms-flex; */
+        display: -ms-flexbox;
+        display: flex;
+    }
+    footer .Type_footer ul>a{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -moz-box-flex: 1;
+        -ms-flex: 1; /* IE 10 */
+        flex: 1;
+        display: block;
+    }
+    footer .Type_footer ul li{
+        text-align: center;
+        box-sizing: border-box;
+        color: #999;}
+    footer .Type_footer ul img{
+        width: 1.2rem;
+        height: 1.3rem;
+        margin: .1rem auto .1rem;}
+    footer .Type_footer a ul li p{
+        font-size: .2rem;
+    }
+
+    .word a{
+        font-size: 0.3rem;
+        margin-left: 4rem;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #tongzhi a{
+        color:#888888;
+        font-size:5px;
+    }
+    .word ul{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    .word li{
+        height: 1.5rem;
+        line-height: 1.5rem;
+        overflow: hidden;
+    }
+    .word img{
+        top: .56rem;
+    }
+    .word{
+        position: relative;
+        margin: .35rem 0 .4rem;
+        background: white;
+    }
+    body{
+        background: #e6e6e6;
+    }
+    .cell-items{
+        padding-bottom: .5rem;
+        margin-bottom: 0;
+
+    }
+    #headban{
+        background: white;
+    }
+    #bmypart1,#bmypart2,#bmypart3{
+        font-size: 13.7px;
+        color:#fe7462;
+        padding: .5rem 0;
+        margin: 0;
+        background: url(/bmy/img/限时抢购.jpg);
+        background-size: 100%;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object{
+        width: 100%;
+    }
+    .mui-table-view-cell>a:not(.mui-btn){
+        padding: 0;
+        border: none;
+    }
+    .mui-table-view,.mui-table-view,.mui-table-view{
+        padding: 0;
+        border: none;
+    }
+    .mui-table-view li,.mui-table-view li,.mui-table-view li{
+        padding: 0;
+        border: none;
+    }
+    .mui-table-view li a,.mui-table-view li a,.mui-table-view li a{
+        padding: 0;
+        border: none;
+    }
+    .mui-media{
+        padding: 0;
+        border: 0;
+    }
+    .divider_line{
+        border: 0;
+    }
+    .position .right{
+        height: 91.51px;
+    }
+    .position .right img{
+        width: 100%;
+        height: 100%;
+    }
+    .mui-grid-view{
+        margin-top: .7rem;
+    }
+    .titlines img{
+        width: 1rem;
+        height: 1rem;
+        margin-left: 1rem;
+        vertical-align: text-bottom;
+    }
+    .titlines span{
+        display: inline-block;
+        padding-left: .7rem;
+        vertical-align: middle;
+        font-size: 14px;
+    }
+    .mui-table-view:after,.mui-table-view:before{
+        display: none;
+    }
+    .more{
+        float: right;
+        color: #999;
+        margin-right: 1.2rem;
+        font-size: 10px;
+    }
+    .titlines .more-img{
+        width: .3rem;
+        height: .6rem;
+        vertical-align: middle;
+        margin: 0;
+        margin-bottom: .2rem;
+        margin-left: .2rem;
+    }
+    .mui-grid-view{
+        margin-top: 0;
+    }
+
+
+    .v4-nav{
+        background: white;
+        height: 2rem;
+        line-height: 2rem;
+        color: #999;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        overflow: hidden;
+
+    }
+
+
+    .v4-nav .lefts,.right{
+        display: inline-block;
+    }
+    .v4-nav .lefts{
+        position: absolute;
+        left: 6rem;
+        width: 100%;
+        text-align: left;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+    .v4-nav .right{
+        color: #ff6600;
+        width: 100%;
+        text-align: center;
+        height: 1.8rem;
+        line-height: 1.8rem;
+    }
+    .v4-nav:first-child{
+        z-index: 1;
+    }
+    .transition{
+        transition: all .5s;
+    }
+    .v4-nav-warp{
+        width: 100%;
+        height: 2rem;
+        overflow: hidden;
+    }
+    .word .v4-nav-warp .v4-nav-img{
+        position: absolute;
+        z-index: 1;
+        top: .6rem;
+    }
+    .word #i{
+        left: 1rem;
+        width: 4rem;
+    }
+
+
+    .jumpp{
+        position: fixed;
+        top: calc(50% - 60px);
+        right: 0;
+        z-index: 10;
+    }
+    .jumpp img{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .jumpp1-warp{
+        background: rgba(0, 0, 0, .7);
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        box-sizing: border-box;
+        padding: 3px;
+        box-shadow: -1px 1px 2px 0px rgba(0,0,0,.5)
+    }
+    .jumpp1{
+        padding: 8px 1px;
+    }
+    .book{
+        border-top: .5px solid rgb(240, 239, 239);
+    }
+    .jumpp-img{
+        height: 1.8rem;
+        line-height: 1.8rem;
+    }
+    .jumpp-img img{
+        vertical-align: middle;
+    }
+    .jumpp2{
+        height: 1.9rem;
+        line-height: 1.8rem;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, .7);
+        text-align: center;
+        margin-top: 1rem;
+        box-shadow: 0px 1px 2px 0px rgba(0,0,0,.5)
+    }
+    .jumpp2 img{
+        vertical-align: middle;
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 1px;
+    }
+    .jummpp_pop{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        max-width: 640px;
+        height: 100%;
+        background: rgba(0, 0, 0, .7);
+        z-index: 111;
+        display: none;
+        text-align: center;
+    }
+    .jummpp_pop_zjg{
+        position: absolute;
+        top: 25%;
+        left: 10%;
+        width: 80%;
+        height: 50%;
+        background: white;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .jummpp_pop_ul{
+        display: -webkit-box;
+        display: -moz-flex;
+        /* display: -ms-flex; */
+        display: -ms-flexbox;
+        display: flex;
+        padding-top: 20px;
+    }
+    .jummpp_pop_zjg li{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -moz-box-flex: 1;
+        -ms-flex: 1; /* IE 10 */
+        flex: 1;
+        text-align: center;
+    }
+    .jummpp_pop_zjg li p{
+        text-align: center;
+        padding-top: 20px;
+        width: 100%;
+        overflow: hidden;
+    }
+    .jummpp_pop_zjg li>div{
+        padding-bottom: 15px;
+        height: 40px;
+        line-height: 40px;
+    }
+    .title-img{
+        width: 90%;
+        padding-top: 30%;
+        vertical-align: middle;
+    }
+    .text-img{
+        width: 50%;
+        padding-top: 5px;
+        vertical-align: top;
+    }
+    .head-img{
+        width: 1.5rem;
+        vertical-align: middle;
+    }
+    .tel-img{
+        width: 1rem;
+        padding: 0 2px;
+        vertical-align: middle;
+    }
+    /* .jummpp_pop img{
+        width: 100%;
+        margin-top: 60%;
+        vertical-align: middle;
+    } */
+    .logo{
+        font-family: '楷体';
+    }
+    .Type_footer .Type_ul p{
+        font-size: 13px;
+    }
+
+    .myupgrade{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+    }
+    .myupgrade .img{
+        overflow-y: scroll;
+        border-radius: .1rem;
+        width: 100%;
+        height: 100%;
+        -webkit-transform: scale(.8,.8);
+        -moz-transform: scale(.8,.8);
+        -o-transform: scale(.8,.8);
+        transform: scale(.8,.8);
+    }
+    .myupgrade .img::-webkit-scrollbar{
+        display: none;
+    }
+    .myupgrade .img::-moz-scrollbar{
+        display: none;
+    }
+    .myupgrade .img::-o-scrollbar{
+        display: none;
+    }
+    .myupgrade .img::scrollbar{
+        display: none;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object{
+        padding: 0;
+    }
+    .mui-table-view-cell{
+        position: relative;
+    }
+    .mylogoo{
+        display: none;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        padding: 0;
+        margin: 0;
+        background: url(/bmy/img/lolo.png);
+        background-size: 100% 100%;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        z-index: 1;
+    }
+    .mylogoo span{
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color:white;
+        font-size: 6px;
+        background-color: transparent;
+    }
+    .myul_li{
+        padding-bottom: 1rem;
+    }
+    .myul_li li{
+        padding: 5px;
+        box-sizing: border-box;
+        border-bottom: .5px solid #f9f9e9;
+        border-left: .5px solid #f9f9e9;
+        margin: 0;
+    }
+    .myul_li li:nth-of-type(3n+1){
+        padding: 5px;
+        border-left: .5px solid transparent;
+        box-sizing: border-box;
+    }
+    .app-header-wrapper .app-header-icon.icon-user{
+        background: none;
+    }
+    .app-header-right{
+        display: none;
+    }
+    .header .logo{
+        margin-top: 5px;
+    }
+    .app-header-right img{
+        width: 40%;
+        margin: .4rem 0 0 0.8rem;
+    }
+    body{
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell .brief{
+        text-align:center;
+        font-size:14px;
+        margin: 0;
+        height: 20px;
+        line-height: 20px;
+    }
+    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+        margin: 0;
+        height: 25px;
+        line-height: 25px;
+        text-align:center;
+        font-size:14px;
+    }
+    .myul_li{
+        padding-bottom: 0;
+    }
+    .mui-col-xs-6{
+        width: 33.3333%;
+    }
+    .mui-table-view-cell>a:not(.mui-btn){
+        overflow: visible;
+    }
+    footer .Type_footer .Type_ul{
+        margin: .3rem 0;
+    }
+    .swiper-container{
+        min-height: 138px;
+    }
+    .first-tip{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        max-width: 640px;
+        height: 100%;
+        background: rgba(0, 0, 0, .5);
+        z-index: 1000;
+        /* display: none; */
+    }
+    .first-tip .warp-tip{
+        position: absolute;
+        width: 80%;
+        max-height: 80%;
+        top: 10%;
+        left: 10%;
+        overflow-y: scroll;
+        border-radius: 10px;
+        -moz-box-shadow:2px 2px 5px #333333; -webkit-box-shadow:2px 2px 5px #333333; box-shadow:2px 2px 5px #333333;
+        /* border-radius: 5px; */
+    }
+    .first-tip .warp-tip::-webkit-scrollbar{
+        display: none;
+    }
+    .first-tip .warp-tip::-moz-scrollbar{
+        display: none;
+    }
+    .first-tip .warp-tip::scrollbar{
+        display: none;
+    }
+    .first-tip .warp-tip img{
+        width: 100%;
+        border-radius: 10px;
+        vertical-align: middle;
+        padding: 0;
+        outline: none;
+    }
+    .first-tip .cancel{
+        width: 10%;
+        position: absolute;
+        right: 10%;
+        top: 10%;
+        /* background: rgba(255, 255, 255, .5); */
+        border-bottom-left-radius: 50%;
+    }
+    .first-tip .cancel img{
+        width: 100%;
+        vertical-align: middle;
+    }
+    button{
+        width: 60%;
+        height: 3rem;
+        background: #fe7462;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        -moz-box-shadow:2px 2px 5px #333333; -webkit-box-shadow:2px 2px 5px #333333; box-shadow:2px 2px 5px #333333;
+    }
+    .foot-btn{
+        position: absolute;
+        bottom: 3rem;
+        width: 100%;
+        max-width: 640px;
+        height: 5rem;
+        line-height: 5rem;
+    }
+    .btn{
+        width: 100%;
+        max-width: 640px;
+        height: 5rem;
+        line-height: 5rem;
+        text-align: center;
+    }
+    .first-tip button{
+        font-size: 30px;
+    }
+
+    .cell-items{
+        display: -webkit-box;/* safari chrome */
+        display: -moz-flex;/* firefox */
+        display: -ms-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        max-width: 640px;
+    }
+    .cell-items .cell-item{
+        -ms-flex: 1; /* IE 10 */
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-box-flex: 1;/* safari chrome */
+        -moz-box-flex: 1;
+    }
+        header{
+            width: 100%;
+            height: 45px;
+            color: white;
+        }
+        .head .left img{
+            width: 50px;
+            /*height: 30px;*/
+            vertical-align: middle;
+            margin: -3px 0 0 1rem;
+        }
+        /* .header{
+            position: fixed;
+            width: 640px;
+        } */
+        .head{
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            max-width: 640px;
+            display: -webkit-box;
+            display: -moz-flex;
+            /* display: -ms-flex; */
+            display: -ms-flexbox;
+            display: flex;
+            height: 45px;
+            line-height: 45px;
+            background: url(/bmy/img/矩形8.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        .head>a,.head>span{
+            display: block;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -moz-box-flex: 1;
+            -ms-flex: 1; /* IE 10 */
+            flex: 1;
+            text-align: center;
+        }
+        .head .left{
+            text-align: left;
+        }
+        .head .right{
+            text-align: right;
+        }
+        .head .right span{
+            padding-right: 1rem;
+        }
+        #headban{
+            text-align: center;
+            padding: 5px 0;
+        }
+        #headban img{
+            height: 35px;
+        }
+        #headban a{
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+        }
+        .titlines{
+            background: white;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 5px;
+        }
+        .img img{
+            width: 100%;
+            max-width: 640px;
+        }
+        a{
+            text-decoration: none;
+        }
+        footer p{
+            margin: 0;
+        }
+        .image-slider-box{
+            overflow: hidden;
+            position: relative;
+            height: 140px;
+        }
+        .image-slider-box li{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+</style>
 <body>
-<header>
-    <div class="head">
-        <a class="left" href="/">
-            <img src="/bmy/箭头_left.png" alt="">
-        </a>
-
-        <span>购物车</span>
-
-        <span class="right"><span>编辑</span></span>
-    </div>
-</header>
-
-<div id="main"></div>
-<!--
-<div class="main">
-    <div class="icon">
-        <div><img src="/bmy/gou.png" alt=""></div>
-    </div>
-
-    <div class="img">
-        <img src="/bmy/bmd.jpg" alt="">
-    </div>
-
-    <div class="con">
-        <div class="title">
-            产品标题
+    <header>
+        <div class="head">
+            <a class="left" href="/">
+                <img src="/bmy/img/head_log.png">
+            </a>
+            <span>首页</span>
+            <span class="right"><span>编辑</span></span>
         </div>
-        <div class="color" style="padding-bottom:5px;">
-            产品属性
+    </header>
 
-        </div>
-        
-        <div class="foot">
-            <div class="big">￥<span>产品价格</span></div>
-            <div class="tool">
-                <span class="j-s">-</span>
-                <span class="s">10</span>
-                <span class="js">+</span>
+    <div id="slider" class="image-slider">
+        <ul class="image-slider-box">
+            <li><a style="width: 100%;" href="#"><img style="max-width: 100%;height: auto;" src="/bmy/img/banner@2.jpg"></a></li>
+            <li><a style="width: 100%;" href="#"><img style="max-width: 100%;height: auto;" src="/bmy/img/banner@2.jpg"></a></li>
+            <li><a style="width: 100%;" href="#"><img style="max-width: 100%;height: auto;" src="/bmy/img/banner@2.jpg"></a></li>
+        </ul>
+        <div class="image-slider-nav">
+            <div class="indicator">
+                <span class="current"></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </div>
-    <p class="delete">
-        <span>删除</span>
-    </p>
-    <i style="display:none;">产品id</i>
-</div>
--->
-<div class="main jsst">
-    <div class="icont">
-        <div><img src="/bmy/gou.png" alt=""></div>
-    </div>
 
-    <div class="imgt">
-        <span>全选</span>
-    </div>
-
-    <div class="cont">
-        <div class="titles">
-            结算
+    <div id="headban">
+        <!-- 图标导航开始 -->
+        <div class="cell-items">
+            <div class="cell-item">
+                <a href="#">
+                    <img src="/bmy/img/共享专区.png">
+                    <div>共享专区</div> 
+                </a>
+            </div>
+            <div class="cell-item">
+                <a href="#">
+                    <img src="/bmy/img/换购专区.png">
+                    <div>换购专区</div>
+                </a>
+            </div>
+            <div class="cell-item">
+                <a href="#">
+                    <img src="/bmy/img/积分专区.png">
+                    <div>积分专区</div>
+                </a>
+            </div>
+            <div class="cell-item">
+                <a href="#">
+                    <img src="/bmy/img/金币.png">
+                    <div>零元购</div>
+                </a>
+            </div>
+            <div class="cell-item">
+                <a href="#">
+                    <img src="/bmy/img/大转盘.png">
+                    <div>大转盘</div>
+                </a>
+            </div>
         </div>
-        <div class="colors">
-            ￥<span>0.0</span>
+        <!-- 图标导航结束 -->
+    </div>
+
+    <ul class="mui-table-view mui-grid-view">
+        <!-- 会员共享区域开始   -->
+        <div class="titlines">
+            <!-- <i> -->
+            <img src="/bmy/img/共享服务.png" alt="BM">
+            <!-- </i> -->
+            <span>会员共享&nbsp;&nbsp;</span>
+            <a href="{:U('type/share',array('type'=>1))}">
+                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
+            </a>
         </div>
-        <div class="peis">
-            合计:
+        <!-- 会员共享区域结束   -->
+
+        <div class="img">
+            <img src="/bmy/img/banner@2.jpg">
         </div>
-    </div>
-</div>
+        <div class="myul_li"></div>
 
-<div class="foot_my"></div>
-<div class="tools">
-    <div>
-        <p>请输入数量值</p>
-        <input type="text" value="10">
-    </div>
-</div>
-<div class="delete_pop">
-    <span>删除成功</span>
-</div>
-
-<footer>
-    <div class="Type_footer">
-        <ul class="Type_ul">
-            <a href="#">
-                <li>
-                    <img src="/bmy/首页_h.png" alt="佰猫">
-                    <p>首页</p>
-                </li>
+        <!-- //...................................................... -->
+        <!-- 换购区域开始   -->
+        <div class="titlines">
+            <!-- <i> -->
+            <img src="/bmy/img/积分.png" alt="BM">
+            <!-- </i> -->
+            <span>换购专区&nbsp;&nbsp;</span>
+            <a href="{:U('type/share',array('type'=>2))}">
+                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
             </a>
-            <a href="#">
-                <li>
-                    <img src="/bmy/分类_h.png" alt="佰猫">
-                    <p>分类</p>
-                </li>
+        </div>
+        <!-- 换购区域结束   -->
+
+        <div class="img">
+            <img src="/bmy/img/banner@2.jpg">
+        </div>
+        <div class="myul_li"></div>
+
+        <!-- //...................................................... -->
+        <!-- 积分商城区域开始   -->
+        <div class="titlines">
+            <!-- <i> -->
+            <img src="/bmy/img/积分.png" alt="BM">
+            <!-- </i> -->
+            <span>积分商城&nbsp;&nbsp;</span>
+            <a href="{:U('type/share',array('type'=>3))}">
+                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
             </a>
-            <a href="#">
-                <li>
-                    <img src="/bmy/纸飞机_h.png" alt="佰猫">
-                    <p>邀请好友</p>
-                </li>
+        </div>
+        <!-- 积分商城区域结束   -->
+
+        <div class="img">
+            <img src="/bmy/img/banner@2.jpg">
+        </div>
+        <div class="myul_li"></div>
+
+        <!-- //...................................................... -->
+        <!-- 零元购 -->
+        <div class="titlines">
+            <!-- <i> -->
+            <img src="/bmy/img/零零-获客宝.png" alt="BM">
+            <!-- </i> -->
+            <span>零元购&nbsp;&nbsp;</span>
+            <a href="{:U('type/share',array('type'=>3))}">
+                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
             </a>
-            <a href="javascript:viod(0);">
-                <li>
-                    <img src="/bmy/购物车.png" alt="佰猫">
-                    <p>购物车</p>
-                </li>
-            </a>
-            <a href="#">
-                <li>
-                    <img src="/bmy/我的_h.png" alt="佰猫">
-                    <p>我的</p>
-                </li>
-            </a>
-        </ul>
-    </div>
-</footer>
+        </div>
 
-<script>
+        <div class="img">
+            <a href="{$score}"><img src="/bmy/img/banner@2.jpg"></a>
+        </div>
+        <div class="myul_li"></div>
 
-    $(function(){
-        var CartPage = function(ele, opt){
-            this.ele = ele,
-                this.air = {
-                    airA: opt.airA,
-                    airB: opt.airB
-                },
-                this.setting = $.extend({},this.air,opt);
-        };
-
-        CartPage.prototype = {
-            executeAir: function(){
-                this.setting.airA(this.ele);
-                if(this.setting.airB){
-                    this.setting.airB(this.ele);
-                }
-            }
-        };
-
-        $.fn.air = function(opt){
-            return new CartPage(this,opt).executeAir();
-        };
-
-        var time = 3000;
-
-        $('.main').air({
-            airA: function(ele){
-                $.ajax({
-                    url: '/ajax/cart.php',
-                    type: 'post',
-                    success: function(data){
-                        // console.log(data)
-                        data = JSON.parse(data);
-                        if(data.code != 1){
-                            return;
-                        }
-                        data.data.forEach(function(i){
-                            $('#main').html($('#main').html() +
-                                '<div class="main">\
-                                    <div class="icon">\
-                                        <div><img src="/bmy/gou.png" alt=""></div>\
-                                    </div>\
-                                    <div class="img">\
-                                        <img src="'+ i.goods_img +'" alt="">\
-                                    </div>\
-                                    <div class="con">\
-                                        <div class="title">\
-                                            '+ i.goods_name +'\
-                                        </div>\
-                                        <div class="color" style="padding-bottom:5px;">\
-                                            '+ i.goods_type +'\
-                                        </div>\
-                                        <div class="foot">\
-                                            <div class="big">￥<span>'+ i.goods_pire +'</span></div>\
-                                            <div class="tool">\
-                                                <span class="j-s">-</span>\
-                                                <span class="s">'+ i.goods_num +'</span>\
-                                                <span class="js">+</span>\
-                                            </div>\
-                                        </div>\
-                                    </div>\
-                                    <p class="delete">\
-                                        <span>删除</span>\
-                                    </p>\
-                                    <i style="display:none;">'+ i.goods_id +'</i>\
-                                </div>'
-                            );
-                        },this);
-                        
-                        Main();
-                    },
-                    error: function(data){
-
-                        console.log(data)
-                        alert('error')  
-                    }
-                });
-            }
-        });
-        function Main(){
-            //产品图标选择
-            $('.main .icon').air({
-                airA: function(ele){
-                    var isHS;
-                    ele.click(function(){
-                        $(this).find('img').is(':hidden') ? $(this).find('img').show() : $(this).find('img').hide();
-                        isHS = true;
-                        ele.each(function(){
-                            $(this).find('img').is(':hidden') ? isHS = false : void(0);
-                        });
-                        isHS ? $('.icont img').show() : $('.icont img').hide();
-                        total();
-                    });
-                }
-            });
-
-            //全选按钮事件
-            $('.icont').air({
-                airA: function(ele){
-                    ele.click(function(){
-                        if($(this).find('img').is(':hidden')){
-                            $(this).find('img').show();
-                            $('.main .icon').each(function(){
-                                $(this).find('img').show();
-                            });
-                        }else{
-                            $(this).find('img').hide();
-                            $('.main .icon').each(function(){
-                                $(this).find('img').hide();
-                            });
-                        }
-                        total();
-                    });
-                }
-            });
-
-            //产品数量减
-            $('.tool .j-s').air({
-                airA: function(ele){
-                    ele.click(function(){
-                        if($(this).next().html() > 0){
-                            $(this).next().html($(this).next().html() - 1)
-                        };
-                        total();
-                    });
-                }
-            });
-
-            //产品数量加
-            $('.tool .js').air({
-                airA: function(ele){
-                    ele.click(function(){
-                        $(this).prev().html(parseFloat($(this).prev().html()) + 1);
-                        total();
-                    });
-                }
-            });
-
-            //点击产品数量弹出输入数值框
-            $('.tool .s').air({
-                airA: function(ele){
-                    var _this;
-                    ele.click(function(){
-                        _this = $(this);
-                        $('.tools').show();
-                        $('.tools input').blur(function(){
-                            _this.html($(this).val());
-                            $('.tools').hide();
-                            total();
-                        })
-                    })
-                }
-            });
-
-            //点击弹框隐藏
-            $('.tools').air({
-                airA: function(ele){
-                    ele.click(function(){
-                        $(this).hide();
-                    })
-                }
-            });
-
-            //取消事件冒泡
-            $('.tools div').air({
-                airA: function(ele){
-                    ele.click(function(event){
-                        event.stopPropagation();
-                    })
-                }
-            });
-
-            //计算总价钱
-            function total(){
-                var num = 0;
-                // $('.big span').html() * $('.tool .s').html();
-                $('.big span').each(function(i){
-                    if($(this).parents('.main').children('.icon').find('img').is(':visible')){
-                        num = num + $(this).html() * $('.tool .s').eq(i).html();
-                    }
-                });
-                $('.colors span').html(num);
-            }
-            total();
-
-            //编辑产品
-            $('.head .right').air({
-                airA: function(ele){
-                    ele.click(function(event){
-                        if(!$('.main')){return}
-                        $('.delete').toggle();
-                        if($('.delete').is(':visible')){
-                            $('.delete').css({'width':'6rem','right':'-6rem'});
-                            $('.main').scrollLeft(1000);
-                            $(this).children().html('完成')
-                        }else{
-                            $('.delete').css({'width':'0','right':'0'});
-                            $(this).children().html('编辑')
-                        }
-                    })
-                },
-                airB: function(ele){
-                    var isif = false,num = 0;
-                    $('.main').scroll(function(){
-                        if(!$(this).scrollLeft()){
-                            isif = true;
-                            $('.main').each(function(){
-                                if($(this).scrollLeft()){
-                                    isif = false;
-                                    num++;
-                                }
-                            });
-                            if(isif){
-                                $('.delete').css({'width':'0','right':'0'});
-                                $('.delete').hide();
-                                ele.children().html('编辑')
-                            }
-                        }
-                    });
-                }
-            });
-
-            //删除产品
-            $('.delete span').air({
-                airA: function(ele){
-                    ele.click(function(){
-                        var _this = $(this);
-                        $.ajax({
-                            url: "/ajax/cart.php",
-                            type: 'POST',
-                            data: {
-                                'cartid': $(this).parent().next().html()
-                            },
-                            success: function(data){
-                                data = JSON.parse(data);
-                                if(data.code == 1){
-                                    _this.parents('.main').remove();
-                                    total();
-                                    $('.delete_pop').html('删除成功').show().delay(time).fadeOut();
-                                }else{
-                                    $('.delete_pop').html('删除失败！').show().delay(time).fadeOut();
-                                }
-                            },
-                            error: function(data){
-                                $('.delete_pop').html('网络不佳！').show().delay(time).fadeOut();
-                            }
-                        });
-                    });
-                }
-            });
-
-            //点击结算
-            $('.titles').air({
-                airA: function(ele){
-                    var cartid = '',strr = '',color_str = '';
-                    ele.click(function(){
-                        if($('.main i').length == 0){
-                            $('.delete_pop').html('没有商品！').show().delay(time).fadeOut();
-                            return;
-                        }
-                        $('.main .s').each(function(){
-
-                            if(parseInt($(this).html()) && $(this).parents('.main').find('.icon img').is(':visible')){
-                                strr = strr + $(this).html() + ',';
-                                cartid = cartid + $(this).parents('.main').find('i').html() + ',';
-                                color_str = color_str + $(this).parents('.main').find('.color').html() + ',';
-                            }
-                        });
-                        if(!strr){
-                            $('.delete_pop').html('没有勾选商品或添加数量！').show().delay(time).fadeOut();
-                            return;
-                        }
-                        strr = strr.substring(0, strr.length-1);
-                        cartid = cartid.substring(0, cartid.length-1);
-                        color_str = color_str.substring(0, color_str.length-1);
-                        window.location.href="/Login/bkeditorder.html?cartid="+cartid+"&num="+strr+"&com_cs="+color_str;
-                    });
-                }
-            });
-        }
-    });
-</script>
+    </ul>
+    <footer>
+        <div class="Type_footer">
+            <ul class="Type_ul">
+                <!-- <a href="{:U('Index/index')}"> -->
+                <a href="javascript:viod(0);">
+                    <li>
+                        <img src="/bmy/img/首页.png" alt="佰猫">
+                        <p>首页</p>
+                    </li>
+                </a>
+                <a href="{:U('Type/index')}">
+                    <!-- <a href="javascript:viod(0);"> -->
+                    <li>
+                        <img src="/bmy/img/分类_h.png" alt="佰猫">
+                        <p>分类</p>
+                    </li>
+                </a>
+                <a href="{:U('Login/mycode',array('u_id'=>$u_id))}">
+                    <li>
+                        <img src="/bmy/img/纸飞机_h.png" alt="佰猫">
+                        <p>邀请好友</p>
+                    </li>
+                </a>
+                <a href="{:U('Goods/cart')}">
+                    <li>
+                        <img src="/bmy/img/购物车_h.png" alt="佰猫">
+                        <p>购物车</p>
+                    </li>
+                </a>
+                <a href="{:U('Means/employee')}">
+                    <li>
+                        <img src="/bmy/img/我的_h.png" alt="佰猫">
+                        <p>我的</p>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+    <script src="/bmy/slider.js"></script>
+    <script>
+        console.log(Slider)
+        Slider('#slider');
+    </script>
 </body>
 </html>

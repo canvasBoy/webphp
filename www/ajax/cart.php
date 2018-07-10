@@ -95,7 +95,7 @@
      */
 /*
     $sql = "INSERT INTO Cart (goods_id, goods_img, goods_name, goods_type, goods_pire, goods_num)
-    VALUES (10, '/bmy/bmd.jpg', '智能联想', '想怎么玩就怎么玩', 3980, 40)";
+    VALUES (10, '/bmy/img/bmd.jpg', '智能联想', '想怎么玩就怎么玩', 3980, 40)";
 
     if ($conn->query($sql) === TRUE) {
         echo "<div style='color:blue;'>新记录插入成功</div>";
@@ -230,10 +230,10 @@
     }
 
     //假设创建多条
-    $arr_str1 = "(23, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
-    $arr_str2 = "(33, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
-    $arr_str3 = "(43, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
-    $arr_str4 = "(53, '/bmy/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str1 = "(23, '/bmy/img/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str2 = "(33, '/bmy/img/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str3 = "(43, '/bmy/img/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
+    $arr_str4 = "(53, '/bmy/img/bmd.jpg', '智能充气娃娃', '你能怎么玩？哈哈', 39800, 50)";
     
     $sql = "INSERT INTO Cart (goods_id, goods_img, goods_name, goods_type, goods_pire, goods_num)
     VALUES ".$arr_str1.','.$arr_str2.','.$arr_str3.','.$arr_str4;
@@ -248,7 +248,7 @@
     /**
     *   数据读取并操作返回给请求页面
     */
-    //此处声明一个成功返回的数组
+    //此处声明一个成功返回给html页面的数组
     $cli_arr_par = [];
 
     if($_POST && $_POST['cartid']){
@@ -271,7 +271,6 @@
         // print_r($attr);
         //遍历每一条数据
         foreach($attr as $v){
-
             /**
             *   下面将php每一条数据对应字段值转化成键值对
             */
