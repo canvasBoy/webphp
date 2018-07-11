@@ -115,25 +115,6 @@
         background: url(/bmy/img/限时抢购.jpg);
         background-size: 100%;
     }
-    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object{
-        width: 100%;
-    }
-    .mui-table-view-cell>a:not(.mui-btn){
-        padding: 0;
-        border: none;
-    }
-    .mui-table-view,.mui-table-view,.mui-table-view{
-        padding: 0;
-        border: none;
-    }
-    .mui-table-view li,.mui-table-view li,.mui-table-view li{
-        padding: 0;
-        border: none;
-    }
-    .mui-table-view li a,.mui-table-view li a,.mui-table-view li a{
-        padding: 0;
-        border: none;
-    }
     .mui-media{
         padding: 0;
         border: 0;
@@ -148,9 +129,6 @@
         width: 100%;
         height: 100%;
     }
-    .mui-grid-view{
-        margin-top: .7rem;
-    }
     .titlines img{
         width: 1rem;
         height: 1rem;
@@ -162,9 +140,6 @@
         padding-left: .7rem;
         vertical-align: middle;
         font-size: 14px;
-    }
-    .mui-table-view:after,.mui-table-view:before{
-        display: none;
     }
     .more{
         float: right;
@@ -179,9 +154,6 @@
         margin: 0;
         margin-bottom: .2rem;
         margin-left: .2rem;
-    }
-    .mui-grid-view{
-        margin-top: 0;
     }
 
 
@@ -398,9 +370,6 @@
     .myupgrade .img::scrollbar{
         display: none;
     }
-    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object{
-        padding: 0;
-    }
     .mui-table-view-cell{
         position: relative;
     }
@@ -458,28 +427,11 @@
         max-width: 640px;
         margin: 0 auto;
     }
-    .mui-table-view.mui-grid-view .mui-table-view-cell .brief{
-        text-align:center;
-        font-size:14px;
-        margin: 0;
-        height: 20px;
-        line-height: 20px;
-    }
-    .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
-        margin: 0;
-        height: 25px;
-        line-height: 25px;
-        text-align:center;
-        font-size:14px;
-    }
     .myul_li{
         padding-bottom: 0;
     }
     .mui-col-xs-6{
         width: 33.3333%;
-    }
-    .mui-table-view-cell>a:not(.mui-btn){
-        overflow: visible;
     }
     footer .Type_footer .Type_ul{
         margin: .3rem 0;
@@ -659,21 +611,158 @@
         footer p{
             margin: 0;
         }
-        .image-slider-box{
-            overflow: hidden;
-            position: relative;
-            height: 140px;
+        .my-index-goods{
+            width: 100%;
         }
-        .image-slider-box li{
+        .my-index-goods li{
+            background: white;
+            float: left;
+            width: 33.3333%;
+            text-align: center;
+            box-sizing: border-box;
+            border: .5px solid #e9e9e9;
+        }
+        .my-index-goods p{
+            margin: 0;
+        }
+        .my-index-goods img{
+            width: 100%;
+        }
+        .my-index-goods .ul-price{
+            color: red;
+        }
+        
+        .image-slider-box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            padding-top: 56%;
+            list-style: none;
+            transition: transform .3s ease-out;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        .image-slider-box.move {
+            transition: none;
+        }
+        .image-slider-nav {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            background: transparent;
+        }
+        .image-slider-nav .indicator span {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            margin: 0 3px;
+            border: 1px solid #a18786;
+            background: transparent;
+            border-radius: 5px;
+        }
+        .image-slider-nav.current {
+            border: 1px solid #ff3200;
+            background: #fff;
+        }
+        .image-slider li::before {
+            display: inline-block;
+            content: ' ';
+            width: 1px;
+            margin-left: -1px;
+            height: 100%;
+            vertical-align: middle;
+            color: transparent;
+            background: transparent;
+        }
+        .image-slider li {
             position: absolute;
             top: 0;
-            left: 0;
+            width: 100%;
+            font-size: 0;
+        }
+        .image-slider img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+        .image-slider {
+            position: relative;
+            padding-top: 36%;
+            overflow: hidden;
+            background: #fff;
+            text-align: center;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .image-slider-nav .indicator span.current {
+            border: 1px solid #ff3200;
+            background: #fff;
+            }
+        .image-slider-nav .indicator span {
+            width: 5px;
+            height: 5px;
+            border: 1px solid #a18786;
+            background: transparent;
+        }
+        .image-slider-nav {
+            background: transparent;
+        }
+
+        .mask-image-slider {
+        display: none;
+        position: absolute;
+        background: rgba(0, 0, 0, .86);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding-top: 0;
+        z-index: 3
+        }
+
+        .mask-image-slider .image-slider-box {
+        height: 100%;
+        padding-top: 0
+        }
+
+        .mask-image-slider .image-slider-box li {
+        height: 100%
+        }
+
+        .mask-image-slider .image-slider-box .pic {
+        height: 100%;
+        padding-top: 0
+        }
+
+        .mask-image-slider .image-slider-nav {
+        bottom: 10px;
+        background: 0 0
+        }
+
+        .mask-image-slider .image-slider-nav .indicator span {
+        width: 10px;
+        height: 10px;
+        border-radius: 10px
+        } 
+
+        .mask-image-slider .image-slider-nav .count {
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        color: #fff
+        }
+
+        .mask-image-slider .image-slider-nav .current-count {
+        font-size: 16px
         }
 </style>
 <body>
     <header>
         <div class="head">
-            <a class="left" href="/">
+            <a class="left" href="/bmy/index">
                 <img src="/bmy/img/head_log.png">
             </a>
             <span>首页</span>
@@ -733,78 +822,18 @@
         <!-- 图标导航结束 -->
     </div>
 
-    <ul class="mui-table-view mui-grid-view">
-        <!-- 会员共享区域开始   -->
-        <div class="titlines">
-            <!-- <i> -->
-            <img src="/bmy/img/共享服务.png" alt="BM">
-            <!-- </i> -->
-            <span>会员共享&nbsp;&nbsp;</span>
-            <a href="{:U('type/share',array('type'=>1))}">
-                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
-            </a>
-        </div>
-        <!-- 会员共享区域结束   -->
+    <div class="titlines">
+        <!-- <i> -->
+        <img src="/bmy/img/共享服务.png" alt="BM">
+        <!-- </i> -->
+        <span>会员共享&nbsp;&nbsp;</span>
+        <a href="{:U('type/share',array('type'=>1))}">
+            <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
+        </a>
+    </div>
 
-        <div class="img">
-            <img src="/bmy/img/banner@2.jpg">
-        </div>
-        <div class="myul_li"></div>
+    <ul class="my-index-goods"></ul>
 
-        <!-- //...................................................... -->
-        <!-- 换购区域开始   -->
-        <div class="titlines">
-            <!-- <i> -->
-            <img src="/bmy/img/积分.png" alt="BM">
-            <!-- </i> -->
-            <span>换购专区&nbsp;&nbsp;</span>
-            <a href="{:U('type/share',array('type'=>2))}">
-                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
-            </a>
-        </div>
-        <!-- 换购区域结束   -->
-
-        <div class="img">
-            <img src="/bmy/img/banner@2.jpg">
-        </div>
-        <div class="myul_li"></div>
-
-        <!-- //...................................................... -->
-        <!-- 积分商城区域开始   -->
-        <div class="titlines">
-            <!-- <i> -->
-            <img src="/bmy/img/积分.png" alt="BM">
-            <!-- </i> -->
-            <span>积分商城&nbsp;&nbsp;</span>
-            <a href="{:U('type/share',array('type'=>3))}">
-                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
-            </a>
-        </div>
-        <!-- 积分商城区域结束   -->
-
-        <div class="img">
-            <img src="/bmy/img/banner@2.jpg">
-        </div>
-        <div class="myul_li"></div>
-
-        <!-- //...................................................... -->
-        <!-- 零元购 -->
-        <div class="titlines">
-            <!-- <i> -->
-            <img src="/bmy/img/零零-获客宝.png" alt="BM">
-            <!-- </i> -->
-            <span>零元购&nbsp;&nbsp;</span>
-            <a href="{:U('type/share',array('type'=>3))}">
-                <span class="more">查看更多<img class="more-img" src="/bmy/img/箭头.png" alt=""></span>
-            </a>
-        </div>
-
-        <div class="img">
-            <a href="{$score}"><img src="/bmy/img/banner@2.jpg"></a>
-        </div>
-        <div class="myul_li"></div>
-
-    </ul>
     <footer>
         <div class="Type_footer">
             <ul class="Type_ul">
@@ -828,7 +857,7 @@
                         <p>邀请好友</p>
                     </li>
                 </a>
-                <a href="{:U('Goods/cart')}">
+                <a href="/bmy/cart/index">
                     <li>
                         <img src="/bmy/img/购物车_h.png" alt="佰猫">
                         <p>购物车</p>
@@ -845,8 +874,26 @@
     </footer>
     <script src="/bmy/slider.js"></script>
     <script>
-        console.log(Slider)
-        Slider('#slider');
+        $.ajax({
+            url: '/ajax/index',
+            type: 'POST',
+            success: function(data){
+                data = JSON.parse(data);
+                if(data.code != 1){
+                    return;
+                }
+                data.data.forEach(function(i){
+                    var str = '<li>\
+                        <img src="'+ i.goods_img +'">\
+                        <p class="ul-title">'+ i.goods_name +'</p>\
+                        <p class="ul-price">￥<span>'+ i.goods_pire +'</span></p>\
+                    </li>';
+                    $('.my-index-goods').html($('.my-index-goods').html() + str);
+                });
+            }
+        });
+        
+        Slider_ID_('#slider');
     </script>
 </body>
 </html>

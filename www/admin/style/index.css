@@ -1,0 +1,74 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+#form-goods{
+    display: none;
+}
+#index-goods{
+    margin: 20px auto 0;
+}
+#index-goods td{
+    border: 1px solid #999;
+    border-collapse:collapse;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    min-width: 100px;
+}
+input{
+    border: none;
+    outline: none;
+    background: #e6e6e6;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    color: brown;
+    width: 169px;
+}
+button{
+    padding: 2px 5px;
+    background: limegreen;
+    color: white;
+    cursor: pointer;
+}
+.creat-btn-warp{
+    text-align: center;
+}
+.creat-btn{
+    background: deepskyblue;
+    padding: 5px;
+    margin-top: 30px;
+    width: 150px;
+    height: 150px;
+    /*line-height: 150px;*/
+    border-radius: 75px;
+    font-size: 16px;
+    outline: none;
+    border: 8px double #e3e3e3;
+}
+.delete{
+    background: red;
+}
+.v{
+    width: 600px;
+    height: 600px;
+    border: 100px solid #E9e9e9;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+    margin-top: -650px;
+    margin-left: 100px;
+    position: fixed;
+    z-index: -1;
+}

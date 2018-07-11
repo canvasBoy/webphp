@@ -44,22 +44,6 @@
 
     //如果有提交数据
     if($_POST && $_POST['code']=='1'){
-        // print_r($_POST['goods_img']);
-        // //文件上传处理
-        // if ($_FILES["file"]["error"] > 0){
-        //     echo "错误：" . $_FILES["file"]["error"] . "<br>";
-        // }else{
-        //     // 判断当期目录下的 upload 目录是否存在该文件
-        //     // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
-        //     if(file_exists("upload/" . $_FILES["file"]["name"])){
-        //         echo $_FILES["file"]["name"] . " 文件已经存在。 ";
-        //     }else{
-        //         // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
-        //         move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
-        //         echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];
-        //     }
-        // }
-
         //则添加进表里
         $arr_str = "(".$_POST['goods_id'].", '".$_POST['goods_img']."', '".$_POST['goods_name']."', '".$_POST['goods_type']."', ".$_POST['goods_pire'].")";
         $sql = "INSERT INTO admIndex (goods_id, goods_img, goods_name, goods_type, goods_pire)
@@ -130,9 +114,7 @@
 ?>
         </tbody>
     </table>
-    <div class="creat-btn-warp">
-        <button class="creat-btn">添加产品</button>
-    </div>
+    <button class="creat-btn">创建产品</button>
     <form id="form-goods" method="post" action="/admin/index.php">
         <input type="text" name="goods_id">
         <input type="text" name="goods_img">
@@ -144,7 +126,6 @@
     <div class="v"></div>
 </body>
 <script>
-console.log($('.creat-btn'))
     $('.creat-btn').click(function(){
         var str = '<tr>\
             <td>\

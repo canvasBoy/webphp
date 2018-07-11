@@ -1,4 +1,4 @@
-;var Slider = (function() {
+function Slider_ID_(id) {
     var Slider = function(id) {
         this.node = $(id)
     }
@@ -161,5 +161,10 @@
         }
     }
 
-    return Slider
-})();
+    // return Slider
+    var slider_id = new Slider(id),maskSlider;
+    if(slider_id.node.length == 0){
+        return;
+    }
+    slider_id.init(0, {cycle: true, interval: 5000});
+}
