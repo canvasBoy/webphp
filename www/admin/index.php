@@ -190,7 +190,7 @@ console.log($('.creat-btn'))
             $('#form-goods').submit();
         }else{
             alert('有空值！') 
-        }
+        } 
     }
     
 </script>
