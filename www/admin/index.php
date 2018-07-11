@@ -189,7 +189,7 @@ console.log($('.creat-btn'))
         if($('#form-goods').find('input[name=goods_id]').val()){
             $('#form-goods').submit();
         }else{
-            alert('有空值！')
+            alert('有空值！') 
         }
     }
     
