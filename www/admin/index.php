@@ -16,6 +16,9 @@
     *
     */
 
+    //设置图片的地址头
+    $imgUrl = "/admin/upload/";
+
     $addrIP = "localhost";
     $adminName = "root";
     $adminPwd = "root";
@@ -44,26 +47,27 @@
 
     //如果有提交数据
     if($_POST && $_POST['code']=='1'){
-        // print_r($_POST['goods_img']);
-        // //文件上传处理
-        // if ($_FILES["file"]["error"] > 0){
-        //     echo "错误：" . $_FILES["file"]["error"] . "<br>";
-        // }else{
-        //     // 判断当期目录下的 upload 目录是否存在该文件
-        //     // 如果没有 upload 目录，你需要创建它，upload 目录权限为 777
-        //     if(file_exists("upload/" . $_FILES["file"]["name"])){
-        //         echo $_FILES["file"]["name"] . " 文件已经存在。 ";
-        //     }else{
-        //         // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
-        //         move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
-        //         echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];
-        //     }
-        // }
+        //文件上传处理
+        if ($_FILES["goods_img"]["error"] > 0){
+            echo "错误：" . $_FILES["goods_img"]["error"] . "<br>";
+        }else{
+            // 判断当期目录下的 upload 目录是否存在该文件
+            if(file_exists("upload/" . $_FILES["goods_img"]["name"])){
+                echo $_FILES["goods_img"]["name"] . " 文件已经存在。 ";
+            }else{
+                // echo "上传文件名: " . $_FILES["goods_img"]["name"] . "<br>";
+                // echo "文件类型: " . $_FILES["goods_img"]["type"] . "<br>";
+                // echo "文件大小: " . ($_FILES["goods_img"]["size"] / 1024) . " kB<br>";
+                // echo "文件临时存储的位置: " . $_FILES["goods_img"]["tmp_name"];
+                // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
+                move_uploaded_file($_FILES["goods_img"]["tmp_name"], "upload/" . $_FILES["goods_img"]["name"]);
+                echo "文件存储在: " . "upload/" . $_FILES["goods_img"]["name"];
+            }
+        }
 
         //则添加进表里
-        $arr_str = "(".$_POST['goods_id'].", '".$_POST['goods_img']."', '".$_POST['goods_name']."', '".$_POST['goods_type']."', ".$_POST['goods_pire'].")";
-        $sql = "INSERT INTO admIndex (goods_id, goods_img, goods_name, goods_type, goods_pire)
-        VALUES ".$arr_str;
+        $arr_str = "(".$_POST['goods_id'].", '".$_FILES["goods_img"]["name"]."', '".$_POST['goods_name']."', '".$_POST['goods_type']."', ".$_POST['goods_pire'].")";
+        $sql = "INSERT INTO admIndex (goods_id, goods_img, goods_name, goods_type, goods_pire) VALUES ".$arr_str;
         if ($conn->query($sql) === TRUE) {
             echo "<div style='color:blue;'>新记录插入admIndex成功</div>";
         } else {
@@ -89,7 +93,6 @@
             $code = 2;
         }
         $attr = $result->fetch_all();
-        $title_arr = array("id","img","name","type","pire");
 ?>
 <body>
     <table id="index-goods">
@@ -105,6 +108,7 @@
         </thead>
         <tbody>
 <?php
+        $title_arr = array("id","img","name","type","pire");
         //渲染页面数据
         foreach($attr as $v){
             /**
@@ -112,9 +116,15 @@
             */
             echo '<tr>';
             for($i=0;$i<count($title_arr);$i++){
-                echo '<td>
-                    <input class="'.$title_arr[$i].'" type="text" value="'.$v[$i].'">
-                </td>';
+                if($title_arr[$i] == "img"){
+                    echo '<td>
+                        <input class="'.$title_arr[$i].'" type="text" value="'.$imgUrl.$v[$i].'">
+                    </td>';
+                }else{
+                    echo '<td>
+                        <input class="'.$title_arr[$i].'" type="text" value="'.$v[$i].'">
+                    </td>';
+                }
                 if($i == count($title_arr)-1){
                     echo '<td>
                         <button class="delete" onclick="deleteFn(this)">删除</button>
@@ -133,9 +143,9 @@
     <div class="creat-btn-warp">
         <button class="creat-btn">添加产品</button>
     </div>
-    <form id="form-goods" method="post" action="/admin/index.php">
+    <form id="form-goods" method="post" action="/admin/index.php" enctype="multipart/form-data">
         <input type="text" name="goods_id">
-        <input type="text" name="goods_img">
+        <!--<input type="file" name="goods_img">-->
         <input type="text" name="goods_name">
         <input type="text" name="goods_type">
         <input type="text" name="goods_pire">
@@ -144,14 +154,13 @@
     <div class="v"></div>
 </body>
 <script>
-console.log($('.creat-btn'))
     $('.creat-btn').click(function(){
         var str = '<tr>\
             <td>\
                 <input class="id" type="text" value="">\
             </td>\
             <td>\
-                <input class="img" type="text" value="">\
+                <input class="img" type="file" name="goods_img">\
             </td>\
             <td>\
                 <input class="name" type="text" value="">\
@@ -163,20 +172,20 @@ console.log($('.creat-btn'))
                 <input class="pire" type="text" value="">\
             </td>\
             <td>\
-                <button onclick="submit(this)">完成</button>\
+                <button type="submit" onclick="submit(this)">完成</button>\
             </td>\
         </tr>';
         $('#index-goods tbody').append(str);
     });
 
     function submit(_this){
+        $('#form-goods').append($(_this).parents('tr').find('.img').clone(true,true));
         $('#form-goods').find('input[name=code]').val(1);
         $('#form-goods').find('input[name=goods_id]').val($(_this).parents('tr').find('.id').val());
-        $('#form-goods').find('input[name=goods_img]').val($(_this).parents('tr').find('.img').val());
         $('#form-goods').find('input[name=goods_name]').val($(_this).parents('tr').find('.name').val());
         $('#form-goods').find('input[name=goods_type]').val($(_this).parents('tr').find('.type').val());
         $('#form-goods').find('input[name=goods_pire]').val($(_this).parents('tr').find('.pire').val());
-        if($('#form-goods').find('input[name=goods_id]').val() && $('#form-goods').find('input[name=goods_img]').val() && $('#form-goods').find('input[name=goods_name]').val() && $('#form-goods').find('input[name=goods_type]').val() && $('#form-goods').find('input[name=goods_pire]').val()){
+        if($('#form-goods').find('input[name=goods_id]').val() && $('#form-goods').find('input[name=goods_name]').val() && $('#form-goods').find('input[name=goods_type]').val() && $('#form-goods').find('input[name=goods_pire]').val()){
             $('#form-goods').submit();
         }else{
             alert('有空值！')
