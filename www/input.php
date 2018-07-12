@@ -16,6 +16,7 @@
         }
         div{
             height: 50px;
+            
         }
         P{
             padding: 0 20px;
