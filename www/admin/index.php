@@ -40,7 +40,7 @@
         reg_date TIMESTAMP
     ) DEFAULT charset=utf8";
     if ($conn->query($sql) === TRUE) {
-        echo "<div style='color:blue;'>Table admIndex created successfully</div>";
+        echo "<div style='color:blue;'>Table admIndex created successfully, 找到了<表></div>";
     } else {
         echo "<div style='color:red;'>创建数据表错误: " . $conn->error . "</div>";
     }
@@ -61,7 +61,7 @@
                 // echo "文件临时存储的位置: " . $_FILES["goods_img"]["tmp_name"];
                 // 如果 upload 目录不存在该文件则将文件上传到 upload 目录下
                 move_uploaded_file($_FILES["goods_img"]["tmp_name"], "upload/" . $_FILES["goods_img"]["name"]);
-                echo "文件存储在: " . "upload/" . $_FILES["goods_img"]["name"]; 
+                echo "<div style='color:green;'>文件存储在: " . "upload/" . $_FILES["goods_img"]["name"]."</div>"; 
             }
         }
 
@@ -69,7 +69,7 @@
         $arr_str = "(".$_POST['goods_id'].", '".$_FILES["goods_img"]["name"]."', '".$_POST['goods_name']."', '".$_POST['goods_type']."', ".$_POST['goods_pire'].")";
         $sql = "INSERT INTO admIndex (goods_id, goods_img, goods_name, goods_type, goods_pire) VALUES ".$arr_str;
         if ($conn->query($sql) === TRUE) {
-            echo "<div style='color:blue;'>新记录插入admIndex成功</div>";
+            echo "<div style='color:yellowgreen;'>新记录插入admIndex成功</div>";
         } else {
             echo "<div style='color:red;'>Error: " . $sql . "<br>" . $conn->error . "</div>";
         }
